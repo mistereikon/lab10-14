@@ -1,0 +1,46 @@
+{% from 'fieldMacro.html' import displayField %}
+{% extends 'base.html' %}
+{% block title %}Account{% endblock %}
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-center">
+                    <img src="{{ url_for('static', filename='images/' + current_user.image) }}" alt="Photo" class="accountPhoto">
+                    <h1>{{ current_user.username }}</h1>
+                    <h4>{{ current_user.email }}</h4>
+                    <p>{{ current_user.aboutMe }}</p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h2>Account Info</h2>
+                <div class="width-300 mx-auto">
+                    <form method="POST" novalidate enctype="multipart/form-data">
+                        {{ form.csrf_token }}
+                        {{ displayField(form.username, "Username") }}
+                        {{ displayField(form.email, "Email") }}
+                        {{ displayField(form.aboutMe, "About Me") }}
+                        {{ displayField(form.image, "Profile Image") }}
+                        <small class="text-muted">
+                            Last Seen: {{ current_user.lastSeen.strftime("%d-%m-%Y %H:%M:%S") }}
+                        </small>
+                        <br><br>
+                        {{ form.submit(class="btn btn-primary width-100 mt-3") }}
+                    </form>
+                    <br><br>
+                    <a href="{{ url_for('auth.resetPassword') }}">
+                        <button class="btn btn-primary width-100">Reset Password</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <style>
+        .accountPhoto {
+            border-radius: 50%;
+            max-width: 200px; /* або інший розмір, який вам потрібен */
+            height: auto;
+        }
+    </style>
+{% endblock %}

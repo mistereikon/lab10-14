@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Сторінка 2{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2>Сторінка №2</h2>
+    <p class="biography">студент ІПЗ-32</p>
+    <h4><a href="{{ url_for('portfolio.about') }}">Повернутися до біографії</a></h4>
+</div>
+{% endblock %}
+

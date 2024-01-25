@@ -1,0 +1,22 @@
+{% from 'fieldMacro.html' import displayField %}
+{% extends 'base.html' %}
+{% block title %}Edit Post{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="text-center mt-5">
+            <h2>Edit post</h2>
+        </div>
+        <div class="mx-auto mt-3" style="max-width: 400px;"> 
+            <form method="POST" novalidate enctype="multipart/form-data">
+                {{ form.csrf_token }}
+                {{ displayField(form.title, "Post title") }}
+                {{ displayField(form.text, "") }}
+                {{ displayField(form.image, "") }}
+                {{ displayField(form.postType, "") }}
+                <br><br>
+                {{ form.submit(class="btn btn-primary width-100", value='Update post') }}
+            </form>
+        </div>
+    </div>
+    
+{% endblock %}

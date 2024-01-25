@@ -1,0 +1,39 @@
+{% set menu = {
+    "Домашня": url_for('portfolio.home'),
+    "Про мене": url_for('portfolio.about'),
+    "Аккаунт": url_for('auth.account'),
+    "Логин": url_for('auth.login'),
+    "Реєстрація": url_for('auth.registration'),
+    "Todo": url_for('todo.todos'),
+    "Відгуки": url_for('feedback.feedbacks'),
+    "Користувачі": url_for('auth.users'),
+    "Пости": url_for('post.posts'),
+    "Вихід": url_for('auth.logout')
+} %}
+
+<nav class="navbar navbar-expand-lg navbar-light centered-navbar" style="background-color: #242424;">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor08" aria-controls="navbarColor04" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="collapse navbar-collapse flex-grow-0" id="navbarColor01">
+        <ul class="navbar-nav">
+          {% for name, url in menu.items() %}
+            {% if current_user.is_authenticated %}
+              {% if name != "Login" and name != "Registration" %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url }}">{{ name }}</a>
+                </li>
+              {% endif %}
+            {% else %}
+              {% if name != "Logout" and name != "Account" %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url }}">{{ name }}</a>
+              </li>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+</nav>
